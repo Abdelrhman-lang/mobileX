@@ -10,6 +10,7 @@ import Menu from "./_component/header/Menu";
 import FixedArrow from "./_component/FixedArrow";
 import Cart from "./_component/Cart";
 import Header from "./_component/header/Header";
+import Footer from "./_component/footer/Footer";
 
 const libre = Libre_Franklin({
   subsets: ["latin"],
@@ -40,7 +41,9 @@ export default function RootLayout({ children }) {
                     <Cart />
                     <Header />
                     <FixedArrow />
+
                     <main>{children}</main>
+                    <Footer />
                   </ProviderPostUser>
                 </OrderProvider>
               </ProductProvider>

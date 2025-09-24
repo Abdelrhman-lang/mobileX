@@ -1,8 +1,4 @@
-import Cart from "./_component/Cart";
 import FeatureSection from "./_component/FeatureSection";
-import FixedArrow from "./_component/FixedArrow";
-import Header from "./_component/header/Header";
-import Menu from "./_component/header/Menu";
 import HeroSection from "./_component/HeroSection";
 import SaleSection from "./_component/SaleSection";
 import SectionGap from "./_component/SectionGap";
@@ -19,6 +15,7 @@ export default function Home() {
         <SaleSection />
         <SectionGap />
         <TrendSection />
+        <SectionGap />
       </div>
     </section>
   );

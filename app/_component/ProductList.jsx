@@ -33,7 +33,11 @@ export default function ProductList() {
               slidesPerView: 2,
               spaceBetween: 20,
             },
-            1024: {
+            960: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            1250: {
               slidesPerView: 4,
               spaceBetween: 30,
             },

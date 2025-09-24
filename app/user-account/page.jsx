@@ -25,9 +25,8 @@ export default function UsreAccountPage() {
   ];
   return (
     <section>
-      <div className="bg-[#F2F3F5] py-2">
-        <BreadCramp />
-      </div>
+      <BreadCramp />
+
       <div className="custom-container">
         <div className="mt-16 mb-5 text-center">
           <h1 className="heading text-primary text-4xl md:text-5xl font-bold px-5 lg:px-0">

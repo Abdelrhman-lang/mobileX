@@ -5,8 +5,7 @@ export default function Navbar() {
     { id: 1, title: "home", href: "/" },
     { id: 2, title: "shop", href: "/shop" },
     { id: 3, title: "about", href: "/about" },
-    { id: 4, title: "blog", href: "/blog" },
-    { id: 5, title: "contact", href: "/contact" },
+    { id: 4, title: "contact", href: "/contact" },
   ];
   return (
     <nav className="text hidden lg:block">

@@ -1,18 +1,22 @@
-import React from "react";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function BreadCramp() {
+  const pathname = usePathname();
   return (
-    <nav aria-label="Breadcrumb">
+    <nav aria-label="Breadcrumb" className="bg-[#F2F3F5] py-2">
       <div className="custom-container">
         <ol className="flex items-center justify-center md:justify-start gap-1 text-xs text-gray-700">
           <li>
-            <a
-              href="#"
+            <Link
+              href="/"
               className="block text-muted font-medium transition-colors hover:text-gray-900"
             >
               {" "}
               Home{" "}
-            </a>
+            </Link>
           </li>
 
           <li className="rtl:rotate-180">
@@ -31,10 +35,14 @@ export default function BreadCramp() {
           </li>
 
           <li>
-            <a href="#" className="block transition-colors hover:text-gray-900">
+            <span className="block transition-colors hover:text-gray-900">
               {" "}
-              User Account{" "}
-            </a>
+              {pathname.includes("about")
+                ? "About Us"
+                : pathname.includes("user-account")
+                  ? "User Account"
+                  : ""}
+            </span>
           </li>
         </ol>
       </div>
