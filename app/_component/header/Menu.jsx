@@ -35,7 +35,9 @@ export default function Menu() {
               key={link.id}
               className="text-2xl font-medium heading capitalize"
             >
-              <Link href={link.href}>{link.title}</Link>
+              <Link href={link.href} onClick={() => setIsMenuOpen(false)}>
+                {link.title}
+              </Link>
             </li>
           );
         })}

@@ -25,14 +25,14 @@ export default function ProductCard({ product }) {
     <div className="relative">
       <div className="p-5 relative">
         <img src={product.images[0]} alt="product-img" />
-        <div className="absolute top-0 right-0 cursor-pointer text-accent group">
+        <div className="absolute top-3.5 right-3.5 lg:top-0 lg:right-0 cursor-pointer text-accent group">
           <Heart />
           <span className="text-[10px] absolute top-0 -left-20 bg-white shadow-md p-1 capitalize opacity-0 group-hover:opacity-100 transition-all duration-300">
             add to wishlist
           </span>
         </div>
       </div>
-      <div>
+      <div className="text-center">
         <p className="text-md text-primary">{product.title.slice(0, 28)}</p>
         <p className="font-medium mt-2">${product.price}</p>
       </div>

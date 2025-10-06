@@ -2,8 +2,8 @@ import React from "react";
 
 export default function AboutGrid2() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 items-center pb-10">
-      <div>
+    <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4 items-center pb-10">
+      <div className="px-5 lg:px-0">
         <h2 className="heading text-5xl capitalize">our story</h2>
         <p className="mt-6 text-lg text-primary text max-w-[400px]">
           Catering to your requirements, handling your needs with care.

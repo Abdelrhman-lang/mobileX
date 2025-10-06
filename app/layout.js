@@ -41,7 +41,6 @@ export default function RootLayout({ children }) {
                     <Cart />
                     <Header />
                     <FixedArrow />
-
                     <main>{children}</main>
                     <Footer />
                   </ProviderPostUser>

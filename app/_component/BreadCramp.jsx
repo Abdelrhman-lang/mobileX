@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 export default function BreadCramp() {
   const pathname = usePathname();
   return (
-    <nav aria-label="Breadcrumb" className="bg-[#F2F3F5] py-2">
+    <nav aria-label="Breadcrumb" className="bg-[#F2F3F5] py-2 px-5 lg:px-0">
       <div className="custom-container">
         <ol className="flex items-center justify-center md:justify-start gap-1 text-xs text-gray-700">
           <li>
@@ -41,7 +41,11 @@ export default function BreadCramp() {
                 ? "About Us"
                 : pathname.includes("user-account")
                   ? "User Account"
-                  : ""}
+                  : pathname.includes("shop")
+                    ? "Products"
+                    : pathname.includes("contact")
+                      ? "Contact Us"
+                      : null}
             </span>
           </li>
         </ol>
