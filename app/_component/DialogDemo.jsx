@@ -93,7 +93,7 @@ export function DialogDemo({
               <Button
                 onClick={() => {
                   const existingProduct = cart.find(
-                    (item) => item.externalId === product.id.toString()
+                    (item) => item.externalId === product.id
                   );
                   if (existingProduct) {
                     Swal.fire({

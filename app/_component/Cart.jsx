@@ -38,7 +38,7 @@ export default function Cart() {
   }, [user]);
   return (
     <section
-      className={`w-96 h-full [scrollbar-width:none] overflow-y-scroll ps-20 pe-5 md:p-10 fixed top-0 ${
+      className={`w-full md:w-96 h-full [scrollbar-width:none] overflow-y-scroll p-5 md:p-10 fixed top-0 ${
         isCartOpen ? "right-0" : "-right-[300%]"
       } transition-all duration-300 bg-white shadow-md z-50 ${
         isCartEmpty ? "flex items-center justify-center" : ""
@@ -70,8 +70,17 @@ export default function Cart() {
                       <img src={cartItem.image} alt="cartItem-img" />
                     </div>
                     <div className="flex-1 text-center md:text-start">
-                      <div className="flex items-center justify-between mb-2.5">
+                      <div className="mb-2.5">
                         <p className="mb-1">{cartItem.name}</p>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <span className="text-muted me-1">
+                            {cartItem.quantity}X
+                          </span>
+                          <span className="font-medium">${cartItem.price}</span>
+                        </div>
+
                         <button
                           onClick={() => deleteFromCart(cartItem.id, user?.id)}
                           className="cursor-pointer"
@@ -79,12 +88,6 @@ export default function Cart() {
                           <Trash className="w-5 h-5" />
                         </button>
                       </div>
-                      <p>
-                        <span className="text-muted me-1">
-                          {cartItem.quantity}X
-                        </span>
-                        <span className="font-medium">${cartItem.price}</span>
-                      </p>
                     </div>
                   </li>
                 );

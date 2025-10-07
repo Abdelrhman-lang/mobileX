@@ -51,7 +51,7 @@ export default function ProductCard({ product }) {
           className={"cursor-pointer"}
           onClick={() => {
             const existingProduct = cart?.find(
-              (item) => item.externalId === product.id.toString()
+              (item) => item.externalId === product.id
             );
             if (existingProduct) {
               Swal.fire({
