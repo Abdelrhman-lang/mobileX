@@ -20,6 +20,8 @@ export async function POST(req) {
         .values({
           name: name,
           email: email,
+          phone: "",
+          address: "",
         })
         .returning();
       return NextResponse.json(result[0]);

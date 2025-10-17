@@ -12,6 +12,8 @@ export const usersTable = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   name: varchar({ length: 255 }).notNull(),
   email: varchar({ length: 255 }).notNull().unique(),
+  phone: text("phone"),
+  address: text("address"),
 });
 
 export const cartTable = pgTable("cart", {
@@ -30,6 +32,21 @@ export const cartItemsTable = pgTable("cart_items", {
   price: numeric("price").notNull(),
   image: text("image").notNull(),
   quantity: integer("quantity").default(1).notNull(),
+});
+export const whislistTable = pgTable("whislist", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id"),
+});
+
+export const whislistItemsTable = pgTable("whislist_items", {
+  id: serial("id").primaryKey(),
+  whislistId: integer("whislist_id")
+    .references(() => whislistTable.id)
+    .notNull(),
+  externalId: text("external_id").notNull(),
+  name: text("name").notNull(),
+  price: numeric("price").notNull(),
+  image: text("image").notNull(),
 });
 
 export const ordersTable = pgTable("orders", {

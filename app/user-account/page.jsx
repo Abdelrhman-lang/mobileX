@@ -6,6 +6,9 @@ import AccountInfo from "../_component/AccountInfo";
 import OrdersInfo from "../_component/OrdersInfo";
 import { OrderContext } from "@/context/OrderContext";
 import OrderDetails from "../_component/OrderDetails";
+import DeliveryInfo from "../_component/DeliveryInfo";
+import SectionGap from "../_component/SectionGap";
+import WishlistDetails from "../_component/WishlistDetails";
 
 export default function UsreAccountPage() {
   const { user } = useUser();
@@ -18,10 +21,9 @@ export default function UsreAccountPage() {
   }, [user]);
   const list = [
     { id: 1, title: "Account information", category: "info" },
-    { id: 2, title: "Adresses", category: "addresse" },
+    { id: 2, title: "Delivery Information", category: "delivery" },
     { id: 3, title: "Orders", category: "orders" },
-    { id: 4, title: "Whislist", category: "wish" },
-    { id: 5, title: "LogOut" },
+    { id: 4, title: "Wishlist", category: "wish" },
   ];
   return (
     <section>
@@ -79,9 +81,14 @@ export default function UsreAccountPage() {
                   loading={loading}
                 />
               )
+            ) : activeList === "delivery" ? (
+              <DeliveryInfo />
+            ) : activeList === "wish" ? (
+              <WishlistDetails />
             ) : null}
           </div>
         </div>
+        <SectionGap />
       </div>
     </section>
   );

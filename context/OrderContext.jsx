@@ -39,7 +39,6 @@ export default function OrderProvider({ children }) {
       const res = await axios.get(`/api/get-order?userId=${userId}`);
       if (res.status === 200) {
         setorders(res.data);
-        console.log(res.data);
       }
     } catch (err) {
       console.log(err);
@@ -53,7 +52,6 @@ export default function OrderProvider({ children }) {
       const res = await axios.get(`/api/get-order-details?orderId=${orderId}`);
       if (res.status === 200) {
         setOrderDetails(res.data);
-        console.log(res.data);
       }
     } catch (err) {
       console.log(err);

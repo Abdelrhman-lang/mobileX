@@ -1,11 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { CartContext } from "@/context/CartContext";
-import { OrderContext } from "@/context/OrderContext";
 import { useUser } from "@clerk/nextjs";
 import { Trash, X } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import Spinner from "./Spinner";
+import { DeliveryDemo } from "./DeliveryDemo";
 export default function Cart() {
   const {
     isCartOpen,
@@ -19,11 +19,6 @@ export default function Cart() {
   } = useContext(CartContext);
   const [isCartEmpty, setIsCartEmpty] = useState(true);
   const { user } = useUser();
-  const { placeOrder } = useContext(OrderContext);
-
-  const handelPlaceOrder = () => {
-    placeOrder();
-  };
   useEffect(() => {
     if (Array.isArray(cart) && cart.length !== 0) {
       setIsCartEmpty(false);
@@ -113,14 +108,7 @@ export default function Cart() {
               >
                 view my cart
               </Button>
-              <Button
-                onClick={handelPlaceOrder}
-                className={
-                  "w-full bg-[#f2f2f2] text-black py-8 rounded-none uppercase"
-                }
-              >
-                place order
-              </Button>
+              <DeliveryDemo />
             </div>
           </div>
         </>

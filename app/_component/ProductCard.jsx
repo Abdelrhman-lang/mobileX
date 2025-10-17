@@ -5,32 +5,26 @@ import { Button } from "@/components/ui/button";
 import Swal from "sweetalert2";
 import { CartContext } from "@/context/CartContext";
 import { useContext } from "react";
+import { WhislistContext } from "@/context/WhislistContext";
+import Link from "next/link";
 export default function ProductCard({ product }) {
   const { cart, addToCart } = useContext(CartContext);
-  //   try {
-  //     const res = await axios.post("/api/post-cart", {
-  //       userId: user?.id,
-  //       externalId: product.id,
-  //       name: product.title,
-  //       price: product.price,
-  //       image: product.images[0],
-  //       quantity: quantity || 1,
-  //     });
-  //     fetchUserCart(user?.id);
-  //   } catch (err) {
-  //     console.log("Error adding to cart", err);
-  //   }
-  // };
+  const { addToWhislist } = useContext(WhislistContext);
   return (
     <div className="relative">
       <div className="p-5 relative">
-        <img src={product.images[0]} alt="product-img" />
-        <div className="absolute top-3.5 right-3.5 lg:top-0 lg:right-0 cursor-pointer text-accent group">
+        <Link href={`/product-details/${product.id}`}>
+          <img src={product.images[0]} alt="product-img" />
+        </Link>
+        <button
+          onClick={() => addToWhislist(product)}
+          className="absolute top-3.5 right-3.5 lg:top-0 lg:right-0 cursor-pointer text-accent group"
+        >
           <Heart />
           <span className="text-[10px] absolute top-0 -left-20 bg-white shadow-md p-1 capitalize opacity-0 group-hover:opacity-100 transition-all duration-300">
             add to wishlist
           </span>
-        </div>
+        </button>
       </div>
       <div className="text-center">
         <p className="text-md text-primary">{product.title.slice(0, 28)}</p>

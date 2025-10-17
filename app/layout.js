@@ -11,6 +11,8 @@ import FixedArrow from "./_component/FixedArrow";
 import Cart from "./_component/Cart";
 import Header from "./_component/header/Header";
 import Footer from "./_component/footer/Footer";
+import UserProvider from "@/context/UserContext";
+import WhislistProvider from "@/context/WhislistContext";
 
 const libre = Libre_Franklin({
   subsets: ["latin"],
@@ -32,22 +34,26 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${libre.variable} ${josefin.variable} antialiased`}>
         <ClerkProvider>
-          <CartProvider>
-            <MenuProvider>
-              <ProductProvider>
-                <OrderProvider>
-                  <ProviderPostUser>
-                    <Menu />
-                    <Cart />
-                    <Header />
-                    <FixedArrow />
-                    <main>{children}</main>
-                    <Footer />
-                  </ProviderPostUser>
-                </OrderProvider>
-              </ProductProvider>
-            </MenuProvider>
-          </CartProvider>
+          <UserProvider>
+            <CartProvider>
+              <WhislistProvider>
+                <MenuProvider>
+                  <ProductProvider>
+                    <OrderProvider>
+                      <ProviderPostUser>
+                        <Menu />
+                        <Cart />
+                        <Header />
+                        <FixedArrow />
+                        <main>{children}</main>
+                        <Footer />
+                      </ProviderPostUser>
+                    </OrderProvider>
+                  </ProductProvider>
+                </MenuProvider>
+              </WhislistProvider>
+            </CartProvider>
+          </UserProvider>
         </ClerkProvider>
       </body>
     </html>

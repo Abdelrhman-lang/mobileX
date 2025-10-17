@@ -1,14 +1,23 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import React from "react";
 
 export default function FooterContent() {
   return (
     <div className="flex flex-col gap-y-5 md:flex-row md:justify-between md:items-center mt-5">
       <ul className="text-center text-accent text-sm capitalize md:w-1/6 w-full">
-        <li className="pb-2.5">about us</li>
-        <li className="pb-2.5">contatc us</li>
-        <li className="pb-2.5">blog</li>
-        <li className="pb-2.5">privacy policy</li>
+        <li className="pb-2.5">
+          <Link href={"/about"}>about us</Link>
+        </li>
+        <li className="pb-2.5">
+          <Link href={"/contact"}>contatc us</Link>
+        </li>
+        <li className="pb-2.5">
+          <Link href={"/shop"}>shop</Link>
+        </li>
+        <li className="pb-2.5">
+          <Link href={"/privacy-policy"}>privacy policy</Link>
+        </li>
       </ul>
       <div className="flex flex-col md:flex-row  items-center gap-5 md:w-1/2 w-full">
         <div className="flex-1">

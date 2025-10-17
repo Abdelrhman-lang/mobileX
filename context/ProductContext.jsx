@@ -13,6 +13,7 @@ export default function ProductProvider({ children }) {
   const [laptops, setLaptops] = useState([]);
   const [mobileAcc, setMobilAcc] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [productDetails, setProductDetails] = useState(null);
   // some products for test
   useEffect(() => {
     const fetchProducts = async () => {
@@ -28,7 +29,6 @@ export default function ProductProvider({ children }) {
     fetchProducts();
   }, []);
 
-  //phones
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
@@ -59,6 +59,20 @@ export default function ProductProvider({ children }) {
     };
     fetchAllProducts();
   }, []);
+
+  const fetchSingleProduct = async (productId) => {
+    try {
+      const res = await axios.get(
+        `https://dummyjson.com/products/${productId}`
+      );
+      if (res.status === 200) {
+        setProductDetails(res.data);
+        console.log(res.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <ProductContext.Provider
       value={{
@@ -69,6 +83,8 @@ export default function ProductProvider({ children }) {
         laptops,
         tablets,
         mobileAcc,
+        fetchSingleProduct,
+        productDetails,
       }}
     >
       {children}

@@ -28,10 +28,10 @@ export default function HeaderActions() {
             <Link href={"/sign-in"}>login</Link>
           )}
         </li>
-        <li className=" transition-colors duration-200 hover:text-muted cursor-pointer">
+        <li className=" transition-colors duration-200 hover:text-muted cursor-pointer hidden md:block">
           <Search />
         </li>
-        <li className=" transition-colors duration-200 hover:text-muted cursor-pointer">
+        <li className=" transition-colors duration-200 hover:text-muted cursor-pointer hidden md:block">
           <Heart />
         </li>
         <li

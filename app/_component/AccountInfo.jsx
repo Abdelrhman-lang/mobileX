@@ -15,6 +15,7 @@ export default function AccountInfo({ username, email, orders }) {
             <input
               className="w-full border py-3 px-4 focus:outline-black"
               defaultValue={field.value}
+              disabled
             />
           </div>
         );
