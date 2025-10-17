@@ -8,10 +8,14 @@ import ProductDetailsImg from "./ProductDetailsImg";
 import ProductDetailsInfo from "./ProductDetailsInfo";
 import SectionGap from "@/app/_component/SectionGap";
 import ProductList from "@/app/_component/ProductList";
+import { CartContext } from "../../../context/CartContext";
+import { WhislistContext } from "@/context/WhislistContext";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const { fetchSingleProduct, productDetails } = useContext(ProductContext);
+  const { addToCart, cart } = useContext(CartContext);
+  const { addToWhislist, userWhislist } = useContext(WhislistContext);
   const [quantity, setQuantity] = useState(1);
   useEffect(() => {
     fetchSingleProduct(id);
@@ -27,6 +31,10 @@ export default function ProductDetails() {
               productDetails={productDetails}
               quantity={quantity}
               setQuantity={setQuantity}
+              addToCart={addToCart}
+              addToWhislist={addToWhislist}
+              cart={cart}
+              userWhislist={userWhislist}
             />
           </div>
         </main>

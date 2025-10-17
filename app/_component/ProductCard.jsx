@@ -9,7 +9,7 @@ import { WhislistContext } from "@/context/WhislistContext";
 import Link from "next/link";
 export default function ProductCard({ product }) {
   const { cart, addToCart } = useContext(CartContext);
-  const { addToWhislist } = useContext(WhislistContext);
+  const { addToWhislist, userWhislist } = useContext(WhislistContext);
   return (
     <div className="relative">
       <div className="p-5 relative">
@@ -17,7 +17,20 @@ export default function ProductCard({ product }) {
           <img src={product.images[0]} alt="product-img" />
         </Link>
         <button
-          onClick={() => addToWhislist(product)}
+          onClick={() => {
+            const existingItem = userWhislist?.find(
+              (item) => Number(item.externalId) === product.id
+            );
+            if (existingItem) {
+              Swal.fire({
+                title: "Alert",
+                text: "Product Already in Your Wishlist",
+                icon: "warning",
+              });
+            } else {
+              addToWhislist(product);
+            }
+          }}
           className="absolute top-3.5 right-3.5 lg:top-0 lg:right-0 cursor-pointer text-accent group"
         >
           <Heart />

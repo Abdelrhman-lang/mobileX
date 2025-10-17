@@ -67,7 +67,6 @@ export default function ProductProvider({ children }) {
       );
       if (res.status === 200) {
         setProductDetails(res.data);
-        console.log(res.data);
       }
     } catch (err) {
       console.log(err);

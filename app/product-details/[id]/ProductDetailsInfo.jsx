@@ -1,10 +1,15 @@
 import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Swal from "sweetalert2";
 
 export default function ProductDetailsInfo({
   productDetails,
   quantity,
   setQuantity,
+  addToCart,
+  addToWhislist,
+  cart,
+  userWhislist,
 }) {
   return (
     <div className="px-5 lg:px-0">
@@ -39,6 +44,20 @@ export default function ProductDetailsInfo({
         </div>
         <div className="mt-8 pb-8">
           <Button
+            onClick={() => {
+              const existingItem = cart?.find(
+                (p) => Number(p.externalId) === productDetails.id
+              );
+              if (existingItem) {
+                Swal.fire({
+                  title: "Alert",
+                  text: "Product Already in Your Cart",
+                  icon: "warning",
+                });
+              } else {
+                addToCart(productDetails, quantity);
+              }
+            }}
             className={
               "w-full rounded-none bg-accent py-7 px-6 mb-3.5 cursor-pointer uppercase"
             }
@@ -46,6 +65,20 @@ export default function ProductDetailsInfo({
             Add To Cart
           </Button>
           <Button
+            onClick={() => {
+              const existingItem = userWhislist?.find(
+                (item) => Number(item.externalId) === productDetails.id
+              );
+              if (existingItem) {
+                Swal.fire({
+                  title: "Alert",
+                  text: "Product Already in Your Wishlist",
+                  icon: "warning",
+                });
+              } else {
+                addToWhislist(productDetails);
+              }
+            }}
             className={
               "w-full rounded-none bg-[#f2f2f2] py-7 px-6 mb-3.5 cursor-pointer text-primary uppercase hover:text-white"
             }
