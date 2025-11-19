@@ -19,6 +19,7 @@ export default function ProductDetails() {
   const { addToCart, cart } = useContext(CartContext);
   const { addToWhislist, userWhislist } = useContext(WhislistContext);
   const [quantity, setQuantity] = useState(1);
+
   useEffect(() => {
     fetchSingleProduct(id);
   }, []);
@@ -50,7 +51,7 @@ export default function ProductDetails() {
         <h1 className="heading text-3xl text-center font-bold px-5 md:px-0">
           Product recommendations
         </h1>
-        <ProductList />
+        <ProductList selectedCategory={productDetails?.category} />
         <SectionGap />
       </div>
     </section>

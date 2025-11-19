@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import React from "react";
+import Link from "next/link";
 
 export default function FeatureSection() {
   return (
@@ -21,11 +20,14 @@ export default function FeatureSection() {
                 Sale up to 50% off!
               </p>
               <div className="mt-8">
-                <Button
-                  className={"bg-accent uppercase py-7 px-10 rounded-none"}
+                <Link
+                  href={"/shop"}
+                  className={
+                    "bg-accent uppercase text-white font-semibold text-sm py-5 px-10 rounded-none"
+                  }
                 >
                   shop now
-                </Button>
+                </Link>
               </div>
             </div>
           </div>

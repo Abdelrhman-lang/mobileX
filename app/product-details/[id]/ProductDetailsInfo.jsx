@@ -30,6 +30,10 @@ export default function ProductDetailsInfo({
         <p className="text my-8 text-accent text-sm">
           {productDetails?.description}
         </p>
+        <p className="text my-8 text-sm">
+          <span className="text-primary">Category: </span>
+          <span className="text-accent">{productDetails?.category}</span>
+        </p>
         <div>
           <span className="text-accent text-sm block mb-2 ">QTY:</span>
           <div className="flex items-center gap-8 py-5 px-5 border w-fit text-accent">

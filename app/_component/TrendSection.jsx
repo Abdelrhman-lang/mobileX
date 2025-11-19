@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import React from "react";
 
 export default function TrendSection() {
@@ -19,11 +19,14 @@ export default function TrendSection() {
               </p>
               <p className="text-lg text-muted mt-2 text">The latest trends</p>
               <div className="mt-8">
-                <Button
-                  className={"bg-accent uppercase py-7 px-10 rounded-none"}
+                <Link
+                  href={"/shop"}
+                  className={
+                    "bg-accent uppercase text-white font-semibold text-sm py-5 px-10 rounded-none"
+                  }
                 >
                   shop now
-                </Button>
+                </Link>
               </div>
             </div>
           </div>
