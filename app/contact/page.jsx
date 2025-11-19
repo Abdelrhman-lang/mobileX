@@ -43,7 +43,7 @@ export default function ContactPage() {
                 <Instagram />
                 <p className="mt-7 mb-3.5">Instagram Page</p>
                 <p className="text-sm text-accent">
-                  <span className="me-2">mobileX</span>
+                  <span className="me-2">Boda Store</span>
                 </p>
               </div>
               <div className="text">

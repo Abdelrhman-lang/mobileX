@@ -15,23 +15,23 @@ export default function CartProvider({ children }) {
   const addToCart = async (product, quantity) => {
     try {
       const res = await axios.post("/api/post-cart", {
-        userId: user?.id,
-        externalId: product.id,
+        userEmail: user?.primaryEmailAddress?.emailAddress,
+        productId: product.id,
         name: product.title,
         price: product.price,
-        image: product.images[0],
+        image: product.image,
         quantity: quantity || 1,
       });
-      fetchUserCart(user?.id);
+      fetchUserCart(user?.primaryEmailAddress?.emailAddress);
     } catch (err) {
       console.log("Error adding to cart", err);
     } finally {
       setLoading(false);
     }
   };
-  const fetchUserCart = async (id) => {
+  const fetchUserCart = async (email) => {
     try {
-      const res = await axios.get(`/api/get-cart?userId=${id}`);
+      const res = await axios.get(`/api/get-cart?userEmail=${email}`);
       if (res.status === 200) {
         setCart(res.data.items);
       }
@@ -41,23 +41,23 @@ export default function CartProvider({ children }) {
       setLoading(false);
     }
   };
-  const deleteFromCart = async (id, userId) => {
+  const deleteFromCart = async (id, email) => {
     try {
       const res = await axios.delete(`/api/delete-from-cart?productId=${id}`);
       if (res.status === 200) {
         setCart((prev) => prev.filter((product) => product.id != id));
-        fetchUserCart(userId);
+        fetchUserCart(email);
       }
     } catch (err) {
       console.log(err);
     }
   };
-  const clearCart = async (userId) => {
+  const clearCart = async (email) => {
     try {
-      const res = await axios.delete(`/api/clear-cart?userId=${userId}`);
+      const res = await axios.delete(`/api/clear-cart?userEmail=${email}`);
       if (res.status === 200) {
         setCart([]);
-        fetchUserCart(userId);
+        fetchUserCart(email);
       }
     } catch (err) {
       console.log(err);

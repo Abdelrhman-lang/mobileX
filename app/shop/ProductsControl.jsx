@@ -1,8 +1,8 @@
 "use client";
 
-import { ProductContext } from "@/context/ProductContext";
+import { NewProductContext } from "@/context/NewProductContext";
 import { Columns3, Columns4, LayoutList } from "lucide-react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export default function ProductsControl({
   activeIcon,
@@ -11,8 +11,10 @@ export default function ProductsControl({
   selectedCategory,
   setSelectedCategory,
 }) {
-  const { allProducts } = useContext(ProductContext);
-
+  const { products, fetchProducts } = useContext(NewProductContext);
+  useEffect(() => {
+    fetchProducts();
+  }, []);
   return (
     <div className="md:px-5 lg:px-0 mt-16 flex flex-col gap-5 md:gap-0 md:flex-row justify-between items-center">
       <div className="text flex items-center gap-5">
@@ -32,7 +34,7 @@ export default function ProductsControl({
           })}
         </select>
       </div>
-      <div className="text-sm text-accent">{allProducts?.length} products</div>
+      <div className="text-sm text-accent">{products?.length} products</div>
       <div className="hidden lg:block">
         <ul className="flex items-center gap-5 text-muted">
           <li

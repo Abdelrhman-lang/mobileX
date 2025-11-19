@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -8,17 +9,18 @@ export default function HeroSection() {
           <p className="text font-semibold text-primary uppercase">
             2022 Collection
           </p>
-          <div className="my-8 text-3xl md:text-6xl heading">
+          <div className="my-10 text-3xl md:text-6xl heading">
             Discover top
             <br /> rated items
           </div>
-          <Button
+          <Link
+            href={"/shop"}
             className={
-              "py-8 lg:px-6  lg:min-w-48 uppercase rounded-none bg-accent"
+              "py-6 px-4 lg:px-6 lg:min-w-48 uppercase rounded-none bg-accent text-white font-bold"
             }
           >
             discover now
-          </Button>
+          </Link>
         </div>
       </div>
     </section>

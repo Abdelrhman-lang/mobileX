@@ -1,19 +1,20 @@
 "use client";
 
+import { NewProductContext } from "@/context/NewProductContext";
 import { ProductContext } from "@/context/ProductContext";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import { useContext } from "react";
 
 export default function Pagination({ page, limit, setPage }) {
-  const { allProducts } = useContext(ProductContext);
+  const { products } = useContext(NewProductContext);
 
-  const totalPages = Math.ceil(allProducts.length / limit);
+  const totalPages = Math.ceil(products.length / limit);
   const start = (page - 1) * limit + 1;
-  const end = Math.min(page * limit, allProducts.length);
+  const end = Math.min(page * limit, products.length);
   return (
     <div className="mt-10 flex flex-col justify-center items-center gap-5">
       <div className="text-accent text-sm text">
-        {start} - {end} products of {allProducts.length}
+        {start} - {end} products of {products.length}
       </div>
       <div>
         <ul className="flex justify-center gap-3 text-gray-900">

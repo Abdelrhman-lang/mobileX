@@ -13,10 +13,16 @@ export default function ProductDetailsInfo({
 }) {
   return (
     <div className="px-5 lg:px-0">
-      <div className="border-b">
-        <span className="block heading capitalize text-sm bg-green-500 w-fit p-0.5 text-white font-semibold">
-          in stock
-        </span>
+      <div>
+        {productDetails?.quantity >= 1 ? (
+          <span className="block heading capitalize text-sm bg-green-500 w-fit p-0.5 text-white font-semibold">
+            in stock
+          </span>
+        ) : (
+          <span className="block heading capitalize text-sm bg-red-500 w-fit p-0.5 text-white font-semibold">
+            out of stock
+          </span>
+        )}
         <h4 className="heading text-primary mt-6 text-3xl font-bold">
           {productDetails?.title}
         </h4>
@@ -46,7 +52,7 @@ export default function ProductDetailsInfo({
           <Button
             onClick={() => {
               const existingItem = cart?.find(
-                (p) => Number(p.externalId) === productDetails.id
+                (p) => p.productId === productDetails.id
               );
               if (existingItem) {
                 Swal.fire({
@@ -55,7 +61,15 @@ export default function ProductDetailsInfo({
                   icon: "warning",
                 });
               } else {
-                addToCart(productDetails, quantity);
+                if (productDetails?.quantity >= 1) {
+                  addToCart(productDetails, quantity);
+                } else {
+                  Swal.fire({
+                    title: "Soooooory.......",
+                    text: "Product Out of Stock",
+                    icon: "error",
+                  });
+                }
               }
             }}
             className={
@@ -67,7 +81,7 @@ export default function ProductDetailsInfo({
           <Button
             onClick={() => {
               const existingItem = userWhislist?.find(
-                (item) => Number(item.externalId) === productDetails.id
+                (item) => item.productId === productDetails.id
               );
               if (existingItem) {
                 Swal.fire({
@@ -86,32 +100,6 @@ export default function ProductDetailsInfo({
             Add To Wishlist
           </Button>
         </div>
-      </div>
-      <div className="pt-8">
-        <p>
-          <span className="text-accent uppercase">sku:</span>
-          <span className="ms-1">{productDetails?.sku}</span>
-        </p>
-        <p>
-          <span className="text-accent capitalize">brand:</span>
-          <span className="ms-1">{productDetails?.brand}</span>
-        </p>
-        <p>
-          <span className="text-accent capitalize">Category:</span>
-          <span className="ms-1">{productDetails?.category}</span>
-        </p>
-        <p>
-          <span className="text-accent capitalize">weight:</span>
-          <span className="ms-1">{productDetails?.weight} Kg</span>
-        </p>
-        <p>
-          <span className="text-accent capitalize">warranty information:</span>
-          <span className="ms-1">{productDetails?.warrantyInformation}</span>
-        </p>
-        <p>
-          <span className="text-accent capitalize">return policy:</span>
-          <span className="ms-1">{productDetails?.returnPolicy}</span>
-        </p>
       </div>
     </div>
   );

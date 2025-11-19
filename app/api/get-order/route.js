@@ -6,16 +6,19 @@ import { NextResponse } from "next/server";
 export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url);
-    const userId = searchParams.get("userId"); // هسيبو string عشان هو جاي من clerk string
+    const userEmail = searchParams.get("userEmail"); // هسيبو string عشان هو جاي من clerk string
 
-    if (!userId) {
-      return NextResponse.json({ error: "Missing user id" }, { status: 400 });
+    if (!userEmail) {
+      return NextResponse.json(
+        { error: "Missing user email" },
+        { status: 400 }
+      );
     }
 
     const result = await db
       .select()
       .from(ordersTable)
-      .where(eq(ordersTable.userId, userId));
+      .where(eq(ordersTable.userEmail, userEmail));
 
     if (result.length === 0) {
       return NextResponse.json({ error: "no orders found" }, { status: 404 });

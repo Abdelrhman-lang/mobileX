@@ -1,8 +1,16 @@
 "use client";
 import { CartContext } from "@/context/CartContext";
 import { MenuContext } from "@/context/MenuContext";
+import { UserContext } from "@/context/UserContext";
 import { UserButton, useUser } from "@clerk/nextjs";
-import { Heart, Menu, Search, ShoppingBagIcon, User } from "lucide-react";
+import {
+  Heart,
+  Menu,
+  Package,
+  Search,
+  ShoppingBagIcon,
+  User,
+} from "lucide-react";
 import Link from "next/link";
 import React, { useContext } from "react";
 
@@ -10,6 +18,7 @@ export default function HeaderActions() {
   const { isSignedIn } = useUser();
   const { setIsMenuOpen } = useContext(MenuContext);
   const { setIsCartOpen, cart } = useContext(CartContext);
+  const { userData, loading } = useContext(UserContext);
   return (
     <div className="">
       <ul className="flex items-center gap-3 lg:gap-10 text-sm">
@@ -23,6 +32,18 @@ export default function HeaderActions() {
                   labelIcon={<User className="w-4 h-4" />}
                 />
               </UserButton.MenuItems>
+              {userData?.role === "admin" ||
+              userData?.role === "super admin" ? (
+                <UserButton.MenuItems>
+                  <UserButton.Link
+                    label="Go To Dashboard"
+                    href="/dash"
+                    labelIcon={<Package className="w-4 h-4" />}
+                  />
+                </UserButton.MenuItems>
+              ) : (
+                ""
+              )}
             </UserButton>
           ) : (
             <Link href={"/sign-in"}>login</Link>

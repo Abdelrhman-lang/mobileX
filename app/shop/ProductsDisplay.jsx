@@ -1,9 +1,8 @@
 "use client";
-
-import { ProductContext } from "@/context/ProductContext";
 import { useContext } from "react";
 import ProductCard from "../_component/ProductCard";
 import Spinner from "../_component/Spinner";
+import { NewProductContext } from "@/context/NewProductContext";
 
 export default function ProductsDisplay({
   gridLayout,
@@ -11,13 +10,13 @@ export default function ProductsDisplay({
   page,
   limit,
 }) {
-  const { loading, allProducts } = useContext(ProductContext);
+  const { loading, products } = useContext(NewProductContext);
 
   // selected Category from select list
   const selectedProducts =
     selectedCategory === "all"
-      ? allProducts
-      : allProducts.filter((p) => p.category === selectedCategory);
+      ? products
+      : products.filter((p) => p.category === selectedCategory);
 
   // pagination
   const start = (page - 1) * limit;

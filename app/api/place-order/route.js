@@ -10,11 +10,11 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    const { userId, userEmail } = await req.json();
+    const { userEmail } = await req.json();
 
-    if (!userId || !userEmail) {
+    if (!userEmail) {
       return NextResponse.json(
-        { error: "Missing user id or email" },
+        { error: "Missing user  email" },
         { status: 400 }
       );
     }
@@ -22,7 +22,7 @@ export async function POST(req) {
     const [cart] = await db
       .select()
       .from(cartTable)
-      .where(eq(cartTable.userId, userId));
+      .where(eq(cartTable.userEmail, userEmail));
 
     if (!cart) {
       return NextResponse.json({ error: "Cart not found" }, { status: 404 });
@@ -40,13 +40,13 @@ export async function POST(req) {
     const [order] = await db
       .insert(ordersTable)
       .values({
-        userId,
+        userEmail,
       })
       .returning();
 
     const orderItems = cartItems.map((item) => ({
       orderId: order.id,
-      externalId: item.externalId,
+      productId: item.productId,
       name: item.name,
       price: item.price,
       image: item.image,

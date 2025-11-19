@@ -18,7 +18,6 @@ export default function OrderProvider({ children }) {
   const placeOrder = async () => {
     try {
       const res = await axios.post("/api/place-order", {
-        userId: user?.id,
         userEmail: user?.primaryEmailAddress?.emailAddress,
       });
       if (res.status === 200) {
@@ -27,16 +26,16 @@ export default function OrderProvider({ children }) {
           text: "Your Order is Created successfully!",
           icon: "success",
         });
-        fetchUserCart(user?.id);
+        fetchUserCart(user?.primaryEmailAddress?.emailAddress);
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const fetchUserOrders = async (userId) => {
+  const fetchUserOrders = async (userEmail) => {
     try {
-      const res = await axios.get(`/api/get-order?userId=${userId}`);
+      const res = await axios.get(`/api/get-order?userEmail=${userEmail}`);
       if (res.status === 200) {
         setorders(res.data);
       }

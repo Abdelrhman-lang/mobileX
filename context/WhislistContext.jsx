@@ -13,10 +13,10 @@ export default function WhislistProvider({ children }) {
   const addToWhislist = async (product) => {
     try {
       const res = await axios.post("/api/post-whislist", {
-        userId: user?.id,
-        externalId: product.id,
+        userEmail: user?.primaryEmailAddress?.emailAddress,
+        productId: product.id,
         name: product.title,
-        image: product.images[0],
+        image: product.image,
         price: product.price,
       });
       if (res.status === 200) {
@@ -30,9 +30,9 @@ export default function WhislistProvider({ children }) {
       console.log(err);
     }
   };
-  const fetchUserWhislist = async (id) => {
+  const fetchUserWhislist = async (userEmail) => {
     try {
-      const res = await axios.get(`/api/get-whislist?userId=${id}`);
+      const res = await axios.get(`/api/get-whislist?userEmail=${userEmail}`);
       if (res.status === 200) {
         console.log(res.data.items);
         setUserWhislist(res.data.items);
@@ -52,7 +52,7 @@ export default function WhislistProvider({ children }) {
         setUserWhislist((prev) =>
           prev.filter((product) => product.id != productId)
         );
-        fetchUserWhislist(user?.id);
+        fetchUserWhislist(user?.primaryEmailAddress?.emailAddress);
       }
     } catch (err) {
       console.log(err);

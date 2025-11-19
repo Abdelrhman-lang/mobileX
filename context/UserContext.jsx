@@ -1,12 +1,14 @@
 "use client";
+import { useUser } from "@clerk/nextjs";
 import axios from "axios";
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 
 export default function UserProvider({ children }) {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { user } = useUser();
   const fetchUserData = useCallback(async (email) => {
     if (!email) return console.warn("❗ Email is required to fetch user data.");
     try {
@@ -20,8 +22,11 @@ export default function UserProvider({ children }) {
       setLoading(false);
     }
   });
+  useEffect(() => {
+    fetchUserData(user?.primaryEmailAddress?.emailAddress);
+  }, [user]);
   return (
-    <UserContext.Provider value={{ userData, fetchUserData }}>
+    <UserContext.Provider value={{ userData, loading }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,7 +1,7 @@
 export default function ProductDetailsImg({ product }) {
   return (
     <div>
-      <img src={product?.images[0]} alt="product-img" />
+      <img src={product?.image} alt="product-img" />
     </div>
   );
 }

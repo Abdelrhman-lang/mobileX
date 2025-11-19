@@ -22,6 +22,7 @@ export async function POST(req) {
           email: email,
           phone: "",
           address: "",
+          role: "user",
         })
         .returning();
       return NextResponse.json(result[0]);

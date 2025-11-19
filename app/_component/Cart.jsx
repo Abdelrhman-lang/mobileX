@@ -28,7 +28,7 @@ export default function Cart() {
   });
   useEffect(() => {
     if (user) {
-      fetchUserCart(user?.id);
+      fetchUserCart(user?.primaryEmailAddress?.emailAddress);
     }
   }, [user]);
   return (
@@ -77,7 +77,12 @@ export default function Cart() {
                         </div>
 
                         <button
-                          onClick={() => deleteFromCart(cartItem.id, user?.id)}
+                          onClick={() =>
+                            deleteFromCart(
+                              cartItem.id,
+                              user?.primaryEmailAddress?.emailAddress
+                            )
+                          }
                           className="cursor-pointer"
                         >
                           <Trash className="w-5 h-5" />
@@ -97,7 +102,9 @@ export default function Cart() {
             <div className="flex justify-end mt-2">
               <button
                 className="capitalize text-muted text-sm cursor-pointer"
-                onClick={() => clearCart(user?.id)}
+                onClick={() =>
+                  clearCart(user?.primaryEmailAddress?.emailAddress)
+                }
               >
                 clear cart
               </button>

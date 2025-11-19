@@ -7,9 +7,9 @@ import { NextResponse } from "next/server";
 export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url);
-    const userId = searchParams.get("userId");
+    const userEmail = searchParams.get("userEmail");
 
-    if (!userId) {
+    if (!userEmail) {
       return NextResponse.json(
         { error: "userId is required" },
         { status: 400 }
@@ -19,7 +19,7 @@ export async function GET(req) {
     const [whislist] = await db
       .select()
       .from(whislistTable)
-      .where(eq(whislistTable.userId, userId));
+      .where(eq(whislistTable.userEmail, userEmail));
 
     if (!whislist) {
       return NextResponse.json({ items: [] });

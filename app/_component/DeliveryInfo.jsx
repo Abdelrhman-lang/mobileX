@@ -2,16 +2,10 @@
 
 import { UserContext } from "@/context/UserContext";
 import { useUser } from "@clerk/nextjs";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 export default function DeliveryInfo() {
-  const { user } = useUser();
-  const { userData, fetchUserData } = useContext(UserContext);
-  useEffect(() => {
-    if (user) {
-      fetchUserData(user?.primaryEmailAddress?.emailAddress);
-    }
-  }, [user]);
+  const { userData } = useContext(UserContext);
   const fields = [
     { id: 1, label: "Name", value: userData?.name },
     { id: 2, label: "Phone Number", value: userData?.phone },

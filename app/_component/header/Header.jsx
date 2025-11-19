@@ -10,7 +10,7 @@ export default function Header() {
     <header
       className={`flex items-center justify-between min-h-24 px-4 lg:px-20 ${
         pathname.includes("sign-in") ? "hidden" : "flex"
-      }`}
+      } ${pathname.includes("dash") ? "hidden" : "flex"}`}
     >
       <Logo />
       <Navbar />

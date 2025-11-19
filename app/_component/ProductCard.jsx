@@ -14,7 +14,7 @@ export default function ProductCard({ product }) {
     <div className="relative">
       <div className="p-5 relative">
         <Link href={`/product-details/${product.id}`}>
-          <img src={product.images[0]} alt="product-img" />
+          <img src={product.image} alt="product-img" />
         </Link>
         <button
           onClick={() => {
@@ -44,21 +44,23 @@ export default function ProductCard({ product }) {
         <p className="font-medium mt-2">${product.price}</p>
       </div>
       <div className="flex flex-col md:flex-row gap-4 items-center justify-center mt-5">
-        <DialogDemo
-          title={"Quick view"}
-          image={product.images[0]}
-          image2={product.images[1] || product.images[0]}
-          image3={product.images[2] || product.images[0]}
-          productTitle={product.title}
-          productPrice={product.price}
-          product={product}
-          handelAddToCart={addToCart}
-        />
+        <div className="hidden lg:flex">
+          <DialogDemo
+            title={"Quick view"}
+            image={product.image}
+            productTitle={product.title}
+            productPrice={product.price}
+            productDescription={product.description}
+            product={product}
+            handelAddToCart={addToCart}
+          />
+        </div>
+
         <Button
           className={"cursor-pointer"}
           onClick={() => {
             const existingProduct = cart?.find(
-              (item) => item.externalId === product.id
+              (item) => item.productId === product.id
             );
             if (existingProduct) {
               Swal.fire({
@@ -67,7 +69,15 @@ export default function ProductCard({ product }) {
                 icon: "warning",
               });
             } else {
-              addToCart(product);
+              if (product?.quantity > 1) {
+                addToCart(product);
+              } else {
+                Swal.fire({
+                  title: "sooory....",
+                  text: "Product Out of Stock",
+                  icon: "error",
+                });
+              }
             }
           }}
         >

@@ -9,15 +9,17 @@ import OrderDetails from "../_component/OrderDetails";
 import DeliveryInfo from "../_component/DeliveryInfo";
 import SectionGap from "../_component/SectionGap";
 import WishlistDetails from "../_component/WishlistDetails";
+import { UserContext } from "@/context/UserContext";
 
 export default function UsreAccountPage() {
   const { user } = useUser();
+  const { userData } = useContext(UserContext);
   const [activeList, setIsActiveList] = useState("orders");
   const { orders, fetchUserOrders, loading } = useContext(OrderContext);
   const [viewOrderDetails, setViewOrdersDetails] = useState(false);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   useEffect(() => {
-    fetchUserOrders(user?.id);
+    fetchUserOrders(user?.primaryEmailAddress?.emailAddress);
   }, [user]);
   const list = [
     { id: 1, title: "Account information", category: "info" },
@@ -63,9 +65,10 @@ export default function UsreAccountPage() {
           <div className="flex-1 pt-2.5 lg:pe-14 lg:ps-24">
             {activeList === "info" ? (
               <AccountInfo
-                username={user?.fullName}
-                email={user?.primaryEmailAddress?.emailAddress}
-                orders={orders.length}
+                username={userData?.name}
+                email={userData?.email}
+                orders={orders?.length}
+                loading={loading}
               />
             ) : activeList === "orders" ? (
               viewOrderDetails === true ? (

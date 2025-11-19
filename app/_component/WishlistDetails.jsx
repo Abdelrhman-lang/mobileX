@@ -11,7 +11,7 @@ export default function WishlistDetails() {
   const { user } = useUser();
   useEffect(() => {
     if (user) {
-      fetchUserWhislist(user?.id);
+      fetchUserWhislist(user?.primaryEmailAddress?.emailAddress);
     }
   }, [user]);
   return (

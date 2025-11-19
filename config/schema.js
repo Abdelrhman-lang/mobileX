@@ -14,11 +14,24 @@ export const usersTable = pgTable("users", {
   email: varchar({ length: 255 }).notNull().unique(),
   phone: text("phone"),
   address: text("address"),
+  role: text("role").default("user").notNull(),
+});
+
+export const productsTable = pgTable("products", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  title: varchar("title").notNull(),
+  description: varchar("description").notNull(),
+  category: varchar("category").notNull(),
+  price: numeric("price", { precision: 10, scale: 2 }).notNull(),
+  quantity: integer("quantity").notNull().default(0),
+  lowStock: integer("lowStock").default(5),
+  createdAt: timestamp("created_at").defaultNow(),
+  image: text("image"),
 });
 
 export const cartTable = pgTable("cart", {
   id: serial("id").primaryKey(),
-  userId: text("user_id"),
+  userEmail: text("user_email"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -27,7 +40,9 @@ export const cartItemsTable = pgTable("cart_items", {
   cartId: integer("cart_id")
     .references(() => cartTable.id)
     .notNull(),
-  externalId: text("external_id").notNull(),
+  productId: integer("product_id")
+    .references(() => productsTable.id)
+    .notNull(),
   name: text("name").notNull(),
   price: numeric("price").notNull(),
   image: text("image").notNull(),
@@ -35,7 +50,7 @@ export const cartItemsTable = pgTable("cart_items", {
 });
 export const whislistTable = pgTable("whislist", {
   id: serial("id").primaryKey(),
-  userId: text("user_id"),
+  userEmail: text("user_email"),
 });
 
 export const whislistItemsTable = pgTable("whislist_items", {
@@ -43,7 +58,9 @@ export const whislistItemsTable = pgTable("whislist_items", {
   whislistId: integer("whislist_id")
     .references(() => whislistTable.id)
     .notNull(),
-  externalId: text("external_id").notNull(),
+  productId: integer("product_id")
+    .references(() => productsTable.id)
+    .notNull(),
   name: text("name").notNull(),
   price: numeric("price").notNull(),
   image: text("image").notNull(),
@@ -51,7 +68,7 @@ export const whislistItemsTable = pgTable("whislist_items", {
 
 export const ordersTable = pgTable("orders", {
   id: serial("id").primaryKey(),
-  userId: text("user_id"),
+  userEmail: text("user_email"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   status: text("status").default("pending").notNull(),
 });
@@ -61,7 +78,9 @@ export const orderItemsTable = pgTable("order_items", {
   orderId: integer("order_id")
     .references(() => ordersTable.id)
     .notNull(),
-  externalId: integer("external_id").notNull(),
+  productId: integer("product_id")
+    .references(() => productsTable.id)
+    .notNull(),
   name: text("name").notNull(),
   price: numeric("price").notNull(),
   image: text("image").notNull(),

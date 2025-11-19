@@ -1,12 +1,14 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Head from "./Head";
 import ProductList from "./ProductList";
 
 export default function SaleSection() {
+  const [selectedCategory, setSelectedCategory] = useState("smartphones");
   return (
-    <section className="px-">
-      <Head title={"on sale"} />
-      <ProductList />
+    <section className="">
+      <Head title={"on sale"} setSelectedCategory={setSelectedCategory} />
+      <ProductList selectedCategory={selectedCategory} />
     </section>
   );
 }

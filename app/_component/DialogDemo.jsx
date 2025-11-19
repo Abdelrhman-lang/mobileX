@@ -19,10 +19,9 @@ import { CartContext } from "@/context/CartContext";
 export function DialogDemo({
   title,
   image,
-  image2,
-  image3,
   productTitle,
   productPrice,
+  productDescription,
   product,
   handelAddToCart,
 }) {
@@ -58,18 +57,27 @@ export function DialogDemo({
                 <img src={image} alt="product-img" />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={image2} alt="product-img" />
+                <img src={image} alt="product-img" />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={image3} alt="product-img" />
+                <img src={image} alt="product-img" />
               </SwiperSlide>
             </Swiper>
           </div>
           <div>
-            <span className="text-xs bg-[#44bb9e] text-white p-1 capitalize font-medium block mb-5 w-fit">
-              in stock
-            </span>
+            {product?.quantity > 1 ? (
+              <span className="text-xs bg-[#44bb9e] text-white p-1 capitalize font-medium block mb-5 w-fit">
+                in stock
+              </span>
+            ) : (
+              <span className="text-xs bg-[#eb1426] text-white p-1 capitalize font-medium block mb-5 w-fit">
+                out of stock
+              </span>
+            )}
             <h4 className="text-2xl heading mb-2.5">{productTitle}</h4>
+            <p className="text my-8 text-accent text-sm">
+              {productDescription}
+            </p>
             <p className="font-medium text-2xl heading">${productPrice}</p>
             <div className="mt-10">
               <span className="text-accent text-sm block mb-2 ">QTY:</span>
@@ -93,7 +101,7 @@ export function DialogDemo({
               <Button
                 onClick={() => {
                   const existingProduct = cart.find(
-                    (item) => item.externalId === product.id
+                    (item) => item.productId === product.id
                   );
                   if (existingProduct) {
                     Swal.fire({
@@ -102,7 +110,15 @@ export function DialogDemo({
                       icon: "warning",
                     });
                   } else {
-                    handelAddToCart(product, quantity);
+                    if (product?.quantity > 1) {
+                      handelAddToCart(product, quantity);
+                    } else {
+                      Swal.fire({
+                        title: "Sooooory.....",
+                        text: "Product Out of Stock",
+                        icon: "error",
+                      });
+                    }
                   }
                 }}
                 className={

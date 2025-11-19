@@ -1,4 +1,6 @@
-export default function AccountInfo({ username, email, orders }) {
+import Spinner from "./Spinner";
+
+export default function AccountInfo({ username, email, orders, loading }) {
   const fields = [
     { id: 1, label: "Name", value: username },
     { id: 2, label: "Email", value: email },
@@ -6,20 +8,28 @@ export default function AccountInfo({ username, email, orders }) {
   ];
   return (
     <main>
-      {fields.map((field) => {
-        return (
-          <div key={field.id} className="mb-10 text">
-            <label className="text-sm text-primary mb-2 block">
-              {field.label}
-            </label>
-            <input
-              className="w-full border py-3 px-4 focus:outline-black"
-              defaultValue={field.value}
-              disabled
-            />
-          </div>
-        );
-      })}
+      {loading ? (
+        <div className="flex items-center justify-center">
+          <Spinner />
+        </div>
+      ) : (
+        <>
+          {fields.map((field) => {
+            return (
+              <div key={field.id} className="mb-10 text">
+                <label className="text-sm text-primary mb-2 block">
+                  {field.label}
+                </label>
+                <input
+                  className="w-full border py-3 px-4 focus:outline-black"
+                  defaultValue={field.value}
+                  disabled
+                />
+              </div>
+            );
+          })}
+        </>
+      )}
     </main>
   );
 }

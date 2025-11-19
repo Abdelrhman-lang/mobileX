@@ -5,19 +5,19 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    const { userId, externalId, name, price, image, quantity } =
+    const { userEmail, productId, name, price, image, quantity } =
       await req.json();
 
     let [cart] = await db
       .select()
       .from(cartTable)
-      .where(eq(cartTable.userId, userId));
+      .where(eq(cartTable.userEmail, userEmail));
 
     if (!cart) {
       const [newCart] = await db
         .insert(cartTable)
         .values({
-          userId,
+          userEmail,
         })
         .returning();
       cart = newCart;
@@ -29,7 +29,7 @@ export async function POST(req) {
       .where(
         and(
           eq(cartItemsTable.cartId),
-          eq(cartItemsTable.externalId, externalId)
+          eq(cartItemsTable.productId, Number(productId))
         )
       );
     if (existingItem.length > 0) {
@@ -43,7 +43,7 @@ export async function POST(req) {
       .insert(cartItemsTable)
       .values({
         cartId: cart.id,
-        externalId,
+        productId,
         name,
         price,
         image,

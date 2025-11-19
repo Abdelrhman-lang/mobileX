@@ -17,13 +17,8 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 
 export function DeliveryDemo() {
-  const { userData, fetchUserData } = useContext(UserContext);
+  const { userData } = useContext(UserContext);
   const { user } = useUser();
-  useEffect(() => {
-    if (user) {
-      fetchUserData(user?.primaryEmailAddress?.emailAddress);
-    }
-  }, [user]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -144,7 +139,6 @@ export function DeliveryDemo() {
             <Button type="submit" onClick={handelSubmit}>
               Place Order
             </Button>
-            <Button onClick={() => console.log(userData)}>click</Button>
           </DialogFooter>
         </DialogContent>
       </form>

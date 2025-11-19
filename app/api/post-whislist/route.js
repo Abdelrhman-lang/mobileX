@@ -5,18 +5,18 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    const { userId, externalId, name, price, image } = await req.json();
+    const { userEmail, productId, name, price, image } = await req.json();
 
     let [whislist] = await db
       .select()
       .from(whislistTable)
-      .where(eq(whislistTable.userId, userId));
+      .where(eq(whislistTable.userEmail, userEmail));
 
     if (!whislist) {
       const [newWhislist] = await db
         .insert(whislistTable)
         .values({
-          userId,
+          userEmail,
         })
         .returning();
       whislist = newWhislist;
@@ -28,7 +28,7 @@ export async function POST(req) {
       .where(
         and(
           eq(whislistItemsTable.whislistId),
-          eq(whislistItemsTable.externalId, externalId)
+          eq(whislistItemsTable.productId, Number(productId))
         )
       );
     if (existingItem.length > 0) {
@@ -42,7 +42,7 @@ export async function POST(req) {
       .insert(whislistItemsTable)
       .values({
         whislistId: whislist.id,
-        externalId,
+        productId,
         name,
         price,
         image,
