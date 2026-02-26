@@ -29,21 +29,21 @@ export default function ContactPage() {
                 <p className="mt-7 mb-3.5">Phone Number</p>
                 <p className="text-sm text-accent">
                   <span className="me-2">Call Us:</span>
-                  <span>01118282107</span>
+                  <a type="tel:01092971381" className="cursor-pointer">01092971381</a>
                 </p>
               </div>
               <div className="text">
                 <Mail />
                 <p className="mt-7 mb-3.5">Email:</p>
                 <p className="text-sm text-accent">
-                  <span className="me-2">abdokhaled766@gmail.com</span>
+                  <a type="mailto" className="me-2">dotphonestore@gmail.com</a>
                 </p>
               </div>
               <div className="text">
                 <Instagram />
                 <p className="mt-7 mb-3.5">Instagram Page</p>
                 <p className="text-sm text-accent">
-                  <span className="me-2">Boda Store</span>
+                  <a mailto="dotphonestore@gmail.com" traget="_blank" className="me-2">dotphone Store</a>
                 </p>
               </div>
               <div className="text">
