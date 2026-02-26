@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { UserButton } from "@clerk/nextjs";
 
 // Menu items.
 const items = [
@@ -70,7 +71,7 @@ const items = [
 export function AppSidebar() {
   const pathname = usePathname();
   return (
-    <Sidebar>
+    <Sidebar className={"relative h-full"}>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Dashboard Control</SidebarGroupLabel>
@@ -91,8 +92,13 @@ export function AppSidebar() {
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
+
         </SidebarGroup>
+
       </SidebarContent>
+      <div className="absolute bottom-5 left-3 ">
+        <UserButton />
+      </div>
     </Sidebar>
   );
 }

@@ -28,7 +28,7 @@ export default function ProductList({ selectedCategory }) {
           <Spinner />
         </div>
       ) : (
-        <>
+        products?.length === 0 ? <div className="text-2xl text-muted flex items-center justify-center">No Products Found</div> : <>
           <Swiper
             slidesPerView={4}
             spaceBetween={30}

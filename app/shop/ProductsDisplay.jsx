@@ -32,7 +32,7 @@ export default function ProductsDisplay({
           <Spinner />
         </div>
       ) : (
-        <div className={gridLayout}>
+        products.length === 0 ? <div className="flex justify-center items-center min-h-36 text-2xl text-muted">No Products Found</div> : <div className={gridLayout}>
           {productsToShow.map((product) => {
             return (
               <div key={product.id}>

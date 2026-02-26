@@ -11,6 +11,8 @@ export default function Pagination({ page, limit, setPage }) {
   const totalPages = Math.ceil(products.length / limit);
   const start = (page - 1) * limit + 1;
   const end = Math.min(page * limit, products.length);
+
+  if (products?.length === 0) return null
   return (
     <div className="mt-10 flex flex-col justify-center items-center gap-5">
       <div className="text-accent text-sm text">
